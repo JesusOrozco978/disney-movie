@@ -1,12 +1,12 @@
-const Sequilize = require('sequelize')
+const Sequelize = require('sequelize')
 const villainsModel = require('./villains')
 
 
-const connection = new Sequilize('disneyMoviesVillains', 'disneyUser', 'disneyPassword', {
+const connection = new Sequelize('disneyMoviesVillains', 'disneyUser', 'disneyPassword', {
   host: 'localhost', dialect: 'mysql'
 }) // database, useres name , and then passwoerd of connection
 
-const villain = villainsModel(connection, Sequilize)
+const villain = villainsModel(connection, Sequelize)
 
 
 

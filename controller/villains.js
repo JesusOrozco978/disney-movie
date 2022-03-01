@@ -11,22 +11,31 @@ const getAllVillains = async (request, response) => {
 }
 
 const getVillainBySlug = async (request, response) => {
-  const { slug } = request.params
-  const foundVillain = await models.villain.findOne({ where: { slug: slug } })
+  try {
+    const { slug } = request.params
+    const foundVillain = await models.villain.findOne({ where: { slug } })
 
-  return response.send(foundVillain)
+    return foundVillain
+      ? response.send(foundVillain) : response.sendStatus(404)
+  } catch (error) {
+    return response.status(500).send('Villain not found, please check spelling')
+  }
 }
 
 const saveNewVillain = async (request, response) => {
-  const { name, movie, slug } = request.body
+  try {
+    const { name, movie, slug } = request.body
 
-  if (!name || !movie || !slug) {
-    return response.status(400).send('This is an error 400')
+    if (!name || !movie || !slug) {
+      return response.status(400).send('This is an error 400')
+    }
+
+    const newVillain = await models.villain.create({ name, movie, slug })
+
+    return response.status(201).send(newVillain)
+  } catch (error) {
+    return response.status(500).send('Can not add Villain')
   }
-
-  const newVillain = await models.villain.create({ name, movie, slug })
-
-  return response.status(201).send(newVillain)
 }
 
 

@@ -8,7 +8,7 @@
     "lint": "npm run lint:pug && npm run lint:eslint",
     "lint:pug": "./node_modules/.bin/pug-lint .",
     "lint:eslint": "./node_modules/.bin/eslint --format codeframe .",
-    "test": "./node_modules/.bin/mocha tests/**/*.test.js"
+    "test": "./node_modules/.bin/mocha test/**/*.test.js"
   },
   "author": "",
   "license": "ISC",
